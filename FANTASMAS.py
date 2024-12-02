@@ -44,3 +44,4 @@ class Ghost4:
     def draw(self):
         
         pyxel.blt(self.ghost_x, self.ghost_y, 1, 0, 0, 16, 16, 0)
+

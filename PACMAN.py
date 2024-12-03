@@ -77,10 +77,12 @@ class AnimatedSprite:
         if pyxel.btn(pyxel.KEY_W):  # Detecta si se presionó la tecla
             self.movement = "pacman_arriba"
             self.pacman_y -= 5
+            self.pacman_imagen = "pacman_arriba"
             self.movimiento = True
         if pyxel.btn(pyxel.KEY_S):
             self.movement = "pacman_abajo"
             self.pacman_y += 5
+            self.pacman_imagen = "pacman_abajo"
             self.movimiento = True
         if pyxel.btn(pyxel.KEY_A):
             self.movement = "pacman_izquierda"
@@ -92,7 +94,7 @@ class AnimatedSprite:
             self.pacman_x += 5
             self.pacman_imagen = "pacman_derecha"
             self.movimiento = True
-        self.movmiento = False
+        #self.movmiento = False
         if not self.movimiento:
             self.movement = "pacman_estático"
             self.pacman_imagen = "pacman_estático"
@@ -117,6 +119,9 @@ class AnimatedSprite:
                 pyxel.blt(self.pacman_x, self.pacman_y, 0, 0, 48, 40, 32, 0)
             elif self.pacman_imagen == "pacman_izquierda":
                 pyxel.blt(self.pacman_x, self.pacman_y, 0, 40, 48, 40, 32, 0)
-        #AQUÍ HAY QUE HACER DOS IF, UNO PARA CUANDO LA F ESTÉ PULSADA, Y OTRO PARA CUANDO NO, Y HACER DOS MOVIMIENTOS DISTINTOS
+            elif self.pacman_imagen == "pacman_arriba":
+                pyxel.blt(self.pacman_x, self.pacman_y, 0, 0, 0, 40, 40, 0)
+            elif self.pacman_imagen == "pacman_abajo":
+                pyxel.blt(self.pacman_x, self.pacman_y, 0, 0, 0, 40, 40, 0)
 
 

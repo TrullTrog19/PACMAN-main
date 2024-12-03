@@ -27,10 +27,11 @@ class PacManApp:
 
     def draw(self):
         pyxel.cls(0)
-        
+        pyxel.bltm(0,0,0,0,0,256,256)
         # Dibujar el Pac-Man animado
         #pyxel.load("assets/resourcesPACMAN.pyxres")
         self.pacman.draw()
+
         #ahora el fantasma
         #pyxel.load("assets/resources.pyxres")
         #self.ghost1.draw()

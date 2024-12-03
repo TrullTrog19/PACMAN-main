@@ -7,11 +7,30 @@ from FANTASMAS import Ghost4
 
 class PacManApp:
     def __init__(self):
-        pyxel.init(256, 256, title="Pac-Man", fps=60, quit_key=pyxel.KEY_Q)
+        pyxel.init(512, 512, title="Pac-Man", fps=60, quit_key=pyxel.KEY_Q)
         # Cargar el archivo de recursos
         pyxel.load("assets/resourcesPACMAN.pyxres")
+        self.mapa = [
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+        ]
         # Crear la instancia de AnimatedSprite para el personaje animado
         self.pacman = AnimatedSprite(80, 60)
+
         #Inicializamos el fantasma
         #self.ghost1 = Ghost1()
         #self.ghost2 = Ghost2()
@@ -27,7 +46,13 @@ class PacManApp:
 
     def draw(self):
         pyxel.cls(0)
-        pyxel.bltm(0,0,0,0,0,256,256)
+        for y in range(len(self.mapa)):
+            for x in range(len(self.mapa[y])):
+                muro = self.mapa[y][x]
+                if muro == 1:
+                    pyxel.blt(x*32,y*32, 1, 0, 0, 32, 32, 0)
+                elif muro == 0:
+                    pass
         # Dibujar el Pac-Man animado
         #pyxel.load("assets/resourcesPACMAN.pyxres")
         self.pacman.draw()

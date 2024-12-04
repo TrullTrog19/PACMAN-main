@@ -1,5 +1,5 @@
 import pyxel
-
+#IMPLEMENTAR COLISIONES ESTOY EN ELLO
 class AnimatedSprite:
     def __init__(self, x, y):
         self.pacman_x = x

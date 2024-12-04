@@ -18,7 +18,7 @@ class Muros:
             [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
         ]
 
-
+        
     def draw(self):
         for y in range(len(self.mapa)):
             for x in range(len(self.mapa[y])):
@@ -27,3 +27,10 @@ class Muros:
                     pyxel.blt(x*40,y*40, 1, 0, 0, 40, 40, 0)
                 elif muro == 0:
                     pass
+    
+    def hitbox(self, x, y):
+        columna = x // 40
+        fila = y // 40
+        if 0 <= fila < len(self.mapa) and 0 <= columna < len(self.mapa[0]):
+            return self.mapa[fila][columna] == 1
+        return False

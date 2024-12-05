@@ -1,4 +1,10 @@
 import pyxel
+#PARA QUE LOS FANTASMAS HEREDEN DE LA CLASE
+class Fantasma():
+    def __init__(self):
+        pass
+
+
 
 class Ghost1:
     def __init__(self):

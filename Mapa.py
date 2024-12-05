@@ -1,6 +1,6 @@
 import pyxel
 
-class Muros:
+class Mapa:
     def __init__(self):
         self.mapa = [
             [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],

@@ -4,7 +4,7 @@ from FANTASMAS import Ghost1
 from FANTASMAS import Ghost2
 from FANTASMAS import Ghost3 
 from FANTASMAS import Ghost4 
-from MURO import Muros
+from Mapa import Mapa
 
 class PacManApp:
     def __init__(self):

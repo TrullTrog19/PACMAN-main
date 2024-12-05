@@ -8,12 +8,12 @@ from Mapa import Mapa
 
 class PacManApp:
     def __init__(self):
-        pyxel.init(1080, 512, title="Pac-Man", fps=60, quit_key=pyxel.KEY_Q)
+        pyxel.init(1080, 520, title="Pac-Man", fps=60, quit_key=pyxel.KEY_Q)
         # Cargar el archivo de recursos
         pyxel.load("assets/resourcesPACMAN.pyxres")
         # Crear la instancia de AnimatedSprite para el personaje animado
         self.pacman = AnimatedSprite(80, 60)
-        self.map = Muros()
+        self.map1 = Mapa()
         #Inicializamos el fantasma
         #pyxel.load("assets/resourcesFANTASMA.pyxres")
         #self.ghost1 = Ghost1()
@@ -24,13 +24,13 @@ class PacManApp:
 
     def update(self):
         # Movimiento del Pac-Man con las teclas W, A, S, D
-        self.pacman.update()
+        self.pacman.update(self.map1)
 
         
 
     def draw(self):
         pyxel.cls(0)
-        self.map.draw()
+        self.map1.draw()
         # Dibujar el Pac-Man animado
         #pyxel.load("assets/resourcesPACMAN.pyxres")
         self.pacman.draw()

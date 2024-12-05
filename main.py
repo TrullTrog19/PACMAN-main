@@ -8,7 +8,7 @@ from Mapa import Mapa
 
 class PacManApp:
     def __init__(self):
-        pyxel.init(600, 600, title="Pac-Man", fps=60, quit_key=pyxel.KEY_Q)
+        pyxel.init(600, 600, title="Pac-Man", fps=40, quit_key=pyxel.KEY_Q)
         # Cargar el archivo de recursos
         pyxel.load("assets/resourcesPACMAN.pyxres")
         # Crear la instancia de AnimatedSprite para el personaje animado

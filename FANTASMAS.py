@@ -9,18 +9,18 @@ class Ghost1:
         pass
     def draw(self):
         
-        pyxel.blt(self.ghost_x, self.ghost_y, 1, 0, 0, 16, 16, 0)
+        pyxel.blt(self.ghost_x, self.ghost_y, 2, 0, 0, 32, 32, 0)
 
 class Ghost2:
     def __init__(self):
-        self.ghost_x = 45
-        self.ghost_y = 190
+        self.ghost_x = 220
+        self.ghost_y = 120
         
     def update(self):
         pass
     def draw(self):
         
-        pyxel.blt(self.ghost_x, self.ghost_y, 1, 0, 0, 16, 16, 0)
+        pyxel.blt(self.ghost_x, self.ghost_y, 2, 32, 0, 32, 32, 0)
 
 
 class Ghost3:
@@ -32,7 +32,7 @@ class Ghost3:
         pass
     def draw(self):
         
-        pyxel.blt(self.ghost_x, self.ghost_y, 1, 0, 0, 16, 16, 0)
+        pyxel.blt(self.ghost_x, self.ghost_y, 2, 0, 32, 32, 32, 0)
 
 class Ghost4:
     def __init__(self):
@@ -43,5 +43,5 @@ class Ghost4:
         pass
     def draw(self):
         
-        pyxel.blt(self.ghost_x, self.ghost_y, 1, 0, 0, 16, 16, 0)
+        pyxel.blt(self.ghost_x, self.ghost_y, 2, 32, 32, 32, 32, 0)
 

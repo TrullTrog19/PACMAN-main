@@ -15,6 +15,7 @@ class PacManApp:
         self.pacman = AnimatedSprite(80, 60)
         self.map = Muros()
         #Inicializamos el fantasma
+        #pyxel.load("assets/resourcesFANTASMA.pyxres")
         #self.ghost1 = Ghost1()
         #self.ghost2 = Ghost2()
         #self.ghost3 = Ghost3()

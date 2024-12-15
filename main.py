@@ -12,7 +12,7 @@ class PacManApp:
         # Cargar el archivo de recursos
         pyxel.load("assets/resourcesPACMAN.pyxres")
         # Crear la instancia de AnimatedSprite para el personaje animado
-        self.pacman = AnimatedSprite(80, 60)
+        self.pacman = AnimatedSprite(32, 32)
         self.map1 = Mapa()
         #Inicializamos el fantasma
         #pyxel.load("assets/resourcesFANTASMA.pyxres")

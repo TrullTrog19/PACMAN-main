@@ -39,9 +39,9 @@ class AnimatedSprite:
         if not self.movimiento:
             self.pacman_imagen = "pacman_estático"
 
-        if not mapa.hitbox(new_x, self.pacman_y) and not mapa.hitbox(new_x + 32, self.pacman_y):
+        if not mapa.hitbox2(new_x, self.pacman_y, 32, 32):
             self.pacman_x = new_x
-        if not mapa.hitbox(self.pacman_x, new_y) and not mapa.hitbox(self.pacman_x, new_y + 32):
+        if not mapa.hitbox2(self.pacman_x, new_y, 32, 32):
             self.pacman_y = new_y
 
 

@@ -79,7 +79,7 @@ class AnimatedSprite:
         #    pyxel.blt(self.pacman_x, self.pacman_y, 0, self.frame_index * 40, 0, 36, 39, 40)
         if self.movimiento == False:
             if self.pacman_imagen == "pacman_estático":
-                pyxel.blt(self.pacman_x, self.pacman_y, 0, 0, 0, 40, 40, 0)
+                pyxel.blt(self.pacman_x, self.pacman_y, 0, 0, 0, 32, 40, 0)
         else:
             if self.pacman_imagen == "pacman_derecha":
                 pyxel.blt(self.pacman_x, self.pacman_y, 0, 0, 48, 40, 32, 0)

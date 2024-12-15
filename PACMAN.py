@@ -39,9 +39,9 @@ class AnimatedSprite:
         if not self.movimiento:
             self.pacman_imagen = "pacman_estático"
 
-        if not mapa.hitbox(new_x, self.pacman_y) and not mapa.hitbox(new_x + 40, self.pacman_y):
+        if not mapa.hitbox(new_x, self.pacman_y) and not mapa.hitbox(new_x + 32, self.pacman_y):
             self.pacman_x = new_x
-        if not mapa.hitbox(self.pacman_x, new_y) and not mapa.hitbox(self.pacman_x, new_y + 40):
+        if not mapa.hitbox(self.pacman_x, new_y) and not mapa.hitbox(self.pacman_x, new_y + 32):
             self.pacman_y = new_y
 
 
@@ -80,14 +80,15 @@ class AnimatedSprite:
         if self.movimiento == False:
             if self.pacman_imagen == "pacman_estático":
                 pyxel.blt(self.pacman_x, self.pacman_y, 0, 0, 0, 32, 40, 0)
+                pyxel.blt(self.pacman_x, self.pacman_y, 0, 0, 0, 32, 32, 0)
         else:
             if self.pacman_imagen == "pacman_derecha":
-                pyxel.blt(self.pacman_x, self.pacman_y, 0, 0, 48, 40, 32, 0)
+                pyxel.blt(self.pacman_x, self.pacman_y, 0, 0, 32, 32, 32, 0)
             elif self.pacman_imagen == "pacman_izquierda":
-                pyxel.blt(self.pacman_x, self.pacman_y, 0, 40, 48, 40, 32, 0)
+                pyxel.blt(self.pacman_x, self.pacman_y, 0, 32, 32, 32, 32, 0)
             elif self.pacman_imagen == "pacman_arriba":
-                pyxel.blt(self.pacman_x, self.pacman_y, 0, 0, 0, 40, 40, 0)
+                pyxel.blt(self.pacman_x, self.pacman_y, 0, 0, 0, 32, 32, 0)
             elif self.pacman_imagen == "pacman_abajo":
-                pyxel.blt(self.pacman_x, self.pacman_y, 0, 0, 0, 40, 40, 0)
+                pyxel.blt(self.pacman_x, self.pacman_y, 0, 0, 0, 32, 32, 0)
 
 

@@ -22,7 +22,6 @@ class Mapa:
             [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         ]
 
-
     def pos_random(self):
         while True:
             x = random.randint(1, len(self.mapa[0])-2)
@@ -36,22 +35,23 @@ class Mapa:
             for x in range(len(self.mapa[y])):
                 muro = self.mapa[y][x]
                 if muro == 1:
-                    pyxel.blt(x*muro_size,y*muro_size, 1, 0, 0, muro_size, muro_size, 0)
+                    pyxel.blt(x*muro_size, y*muro_size, 1, 0, 0, muro_size, muro_size, 0)
                 elif muro == 0:
                     pass
+
+    def es_muro(self, x, y):
+        columna = x // 32
+        fila = y // 32
+        if 0 <= fila < len(self.mapa) and 0 <= columna < len(self.mapa[0]):
+            return self.mapa[fila][columna] == 1
+        return False
     
-    #def hitbox(self, x, y):
-    #    columna = x // 32
-    #    fila = y // 32
-    #    if 0 <= fila < len(self.mapa) and 0 <= columna < len(self.mapa[0]):
-    #        return self.mapa[fila][columna] == 1
-    #    return False
-    
-    def hitbox2(self, x, y ,ancho, alto):
+    def hitbox2(self, x, y, ancho, alto):
         margen_inf = 2
         margen_colision = 2
         for i in range((y + margen_inf) // 32, (y + alto - 1 - margen_inf) // 32 + 1):  # Filas afectadas, desde la esquina izq hasta la derecha
-            for j in range((x + margen_colision) // 32 , (x + ancho - 1 - margen_colision) // 32 + 1):  # Columnas afectadas, desde la esquina izq hasta la derecha
+            for j in range((x + margen_colision) // 32, (x + ancho - 1 - margen_colision) // 32 + 1):  # Columnas afectadas, desde la esquina izq hasta la derecha
                 if 0 <= i < len(self.mapa) and 0 <= j < len(self.mapa[0]):  # Límite del mapa
                     if self.mapa[i][j] == 1:  # Si hay un muro
                         return True
+        return False

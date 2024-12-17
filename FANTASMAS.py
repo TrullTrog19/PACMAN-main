@@ -18,6 +18,7 @@ class Fantasma:
         self.animation_speed = animation_speed
 
     def move(self):
+        #Movimiento
         new_x = self.ghost_x
         new_y = self.ghost_y
 

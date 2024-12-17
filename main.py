@@ -12,12 +12,15 @@ class PacManApp:
         pyxel.run(self.update, self.draw)
 
     def iniciar_nivel(self):
-        self.pacman = AnimatedSprite(32, 32)
+        self.pacman = AnimatedSprite(32, 64)
         self.map1 = Mapa()
         self.bolitas_comidas = 0  # Contador de bolitas comidas
         self.vidas = 3  # Contador de vidas
-        self.ghosts = [Ghost1(self.map1, self.pacman), Ghost2(self.map1, self.pacman), Ghost3(self.map1), Ghost4(self.map1)]
+        self.ghosts = [Ghost1(self.map1, self.pacman, 448, 448), Ghost2(self.map1, self.pacman, 448, 448), Ghost3(self.map1, 448, 448), Ghost4(self.map1, 448, 448)]
         self.fruit_ghost = None  # Fantasma que aparece cuando Pac-Man se come frutas
+        self.ghost5_mode = False  # Modo Ghost5 activado
+        self.ghost5_mode_start_time = 0  # Tiempo de inicio del modo Ghost5
+        self.ghost_positions = []  # Lista para almacenar las posiciones de los fantasmas
 
     def update(self):
         if self.pacman.update(self.map1):
@@ -25,11 +28,14 @@ class PacManApp:
         for ghost in self.ghosts:
             ghost.update()
             if self.check_collision(self.pacman, ghost):
-                if ghost.huyendo:
+                if isinstance(ghost, Ghost5):
+                    ghost.ghost_x, ghost.ghost_y = self.map1.pos_random()  # Ghost5 reaparece en una posición aleatoria
+                elif ghost.huyendo:
                     ghost.ghost_x, ghost.ghost_y = self.map1.pos_random()  # Reaparece en una posición aleatoria
                     ghost.huyendo = False  # Deja de huir
                 else:
                     self.vidas -= 1  # Decrementa el contador de vidas si hay colisión con un fantasma
+                    self.pacman.pacman_x, self.pacman.pacman_y = self.map1.pos_random()
                     if self.vidas == 0:
                         pyxel.quit()  # Termina el juego si se acaban las vidas
                     else:
@@ -40,16 +46,33 @@ class PacManApp:
             self.fruit_ghost.update()
             if self.check_collision(self.pacman, self.fruit_ghost):
                 self.vidas -= 1  # Decrementa el contador de vidas si hay colisión con el fantasma de la fruta
+                self.pacman.pacman_x, self.pacman.pacman_y = self.map1.pos_random()  # Pac-Man reaparece en una posición aleatoria
                 if self.vidas == 0:
                     pyxel.quit()  # Termina el juego si se acaban las vidas
-                else:
-                    self.iniciar_nivel()  # Reinicia el nivel si aún quedan vidas
 
         # Verifica si Pac-Man ha comido una fruta
         if self.map1.comer_fruta(self.pacman.pacman_x, self.pacman.pacman_y):
-            for ghost in self.ghosts:
-                ghost.__class__ = Ghost5  # Convierte el fantasma a Ghost5
-                ghost.huyendo = True  # Hace que el fantasma huya de Pac-Man
+            self.ghost5_mode = True
+            self.ghost5_mode_start_time = pyxel.frame_count
+            self.ghost_positions = [(ghost.ghost_x, ghost.ghost_y) for ghost in self.ghosts]  # Almacena las posiciones de los fantasmas
+            for i in range(len(self.ghosts)):
+                ghost = self.ghosts[i]
+                self.ghosts[i] = Ghost5(self.map1, self.pacman, ghost.ghost_x, ghost.ghost_y)  # Convierte el fantasma a Ghost5 manteniendo su posición
+                self.ghosts[i].huyendo = True  # Hace que el fantasma huya de Pac-Man
+
+        # Verifica si el modo Ghost5 ha durado más de 10 segundos
+        if self.ghost5_mode and (pyxel.frame_count - self.ghost5_mode_start_time) > 600:  # 600 frames = 10 seconds at 60 FPS
+            self.ghost5_mode = False
+            for i in range(len(self.ghosts)):
+                ghost_x, ghost_y = self.ghosts[i].ghost_x, self.ghosts[i].ghost_y  # Obtiene la posición actual del Ghost5
+                if i == 0:
+                    self.ghosts[i] = Ghost1(self.map1, self.pacman, ghost_x, ghost_y)
+                elif i == 1:
+                    self.ghosts[i] = Ghost2(self.map1, self.pacman, ghost_x, ghost_y)
+                elif i == 2:
+                    self.ghosts[i] = Ghost3(self.map1, ghost_x, ghost_y)
+                elif i == 3:
+                    self.ghosts[i] = Ghost4(self.map1, ghost_x, ghost_y)
 
     def draw(self):
         pyxel.cls(0)

@@ -31,6 +31,7 @@ class Fantasma:
         self.move_general()
     
     def pacman_visto(self):
+        #Ver pacman
         if self.pacman:
             if self.ghost_x == self.pacman.pacman_x:
                 if self.ghost_y < self.pacman.pacman_y:

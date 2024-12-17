@@ -5,7 +5,7 @@ from FANTASMAS import Ghost2
 from FANTASMAS import Ghost3 
 from FANTASMAS import Ghost4 
 from Mapa import Mapa
-
+#definimos la clase principal
 class PacManApp:
     def __init__(self):
         pyxel.init(512, 512, title="Pac-Man", fps=60, quit_key=pyxel.KEY_Q)

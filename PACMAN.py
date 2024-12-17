@@ -44,10 +44,6 @@ class AnimatedSprite:
         if not mapa.hitbox_pacman(new_x, new_y, self.ancho, self.alto):
             self.pacman_x = new_x
             self.pacman_y = new_y
-        
-
-
-
 
     def update(self, mapa):
         # Variable para verificar si hubo movimient
@@ -62,17 +58,11 @@ class AnimatedSprite:
             self.move("pacman_derecha", mapa)
         if not self.movimiento:
             self.pacman_imagen = "pacman_estático"
-        #self.movmiento = False
-        #if not self.movimiento:
-        #    self.movement = "pacman_estático"
-        #    self.pacman_imagen = "pacman_estático"
-        #if pyxel.btnp(pyxel.KEY_F):
-        #    self.pacman_x += 0
-        #    movimiento = True
-        # Cambiar el fotograma solo si hubo movimiento
-        #if movimiento:
-        #    self.pacman_imagen = "pacman_f"
-        #    self.change_frame()
+
+        # Verifica si Pac-Man ha comido una bolita
+        if mapa.comer_bolita(self.pacman_x, self.pacman_y):
+            return True  # Indica que se ha comido una bolita
+        return False
 
     def draw(self):
         # Dibuja el fotograma actual del sprite
@@ -92,5 +82,3 @@ class AnimatedSprite:
                 pyxel.blt(self.pacman_x, self.pacman_y, 0, 0, 0, 30, 30, 0)
             elif self.pacman_imagen == "pacman_abajo":
                 pyxel.blt(self.pacman_x, self.pacman_y, 0, 0, 0, 30, 30, 0)
-
-

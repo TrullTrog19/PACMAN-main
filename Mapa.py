@@ -5,20 +5,20 @@ class Mapa:
     def __init__(self):
         self.mapa = [
             [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-            [1, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 1],
-            [1, 2, 1, 1, 1, 2, 2, 1, 2, 1, 1, 1, 2, 2, 2, 1],
-            [1, 2, 1, 2, 1, 2, 2, 1, 2, 1, 2, 1, 2, 2, 2, 1],
-            [1, 2, 1, 2, 1, 2, 2, 1, 2, 1, 2, 1, 1, 1, 2, 1],
-            [1, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 1],
-            [1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1],
-            [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1],
-            [1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 2, 1],
-            [1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1, 2, 1],
-            [1, 2, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1],
-            [1, 2, 1, 2, 2, 2, 2, 1, 2, 2, 2, 1, 2, 1, 2, 1],
-            [1, 2, 1, 2, 1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1],
-            [1, 2, 1, 2, 2, 1, 2, 1, 2, 1, 2, 1, 2, 2, 2, 1],
-            [1, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
+            [1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1],
+            [1, 0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1],
+            [1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1],
+            [1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1],
+            [1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1],
+            [1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1],
+            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1],
+            [1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1],
+            [1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1],
+            [1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1],
+            [1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1],
+            [1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
+            [1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
             [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         ]
 
@@ -36,8 +36,8 @@ class Mapa:
                 celda = self.mapa[y][x]
                 if celda == 1:
                     pyxel.blt(x*muro_size, y*muro_size, 1, 0, 0, muro_size, muro_size, 0)
-                elif celda == 2:
-                    pyxel.blt(x*muro_size, y*muro_size, 1, 0, 40, 16, 16, 0)
+                elif celda == 0:
+                    pyxel.blt(x*muro_size + 8, y*muro_size + 8, 1, 0, 40, 16, 16, 0)  # Dibuja la bolita en el centro de la celda
 
     def es_muro(self, x, y):
         columna = x // 32
@@ -50,7 +50,16 @@ class Mapa:
         columna = x // 32
         fila = y // 32
         if 0 <= fila < len(self.mapa) and 0 <= columna < len(self.mapa[0]):
-            return self.mapa[fila][columna] == 2
+            return self.mapa[fila][columna] == 0
+        return False
+    
+    def comer_bolita(self, x, y):
+        columna = x // 32
+        fila = y // 32
+        if 0 <= fila < len(self.mapa) and 0 <= columna < len(self.mapa[0]):
+            if self.mapa[fila][columna] == 0:
+                self.mapa[fila][columna] = -1  # Marca la bolita como comida
+                return True
         return False
     
     def hitbox_pacman(self, x, y, ancho, alto):
@@ -61,6 +70,8 @@ class Mapa:
                 if 0 <= i < len(self.mapa) and 0 <= j < len(self.mapa[0]):  # Límite del mapa
                     if self.mapa[i][j] == 1:  # Si hay un muro
                         return True
+        return False
+    
     def hitbox_fantasma(self, x, y, ancho, alto):
         margen_inf = 1
         margen_colision = 1
@@ -69,3 +80,4 @@ class Mapa:
                 if 0 <= i < len(self.mapa) and 0 <= j < len(self.mapa[0]):
                     if self.mapa[i][j] == 1:
                         return True
+        return False

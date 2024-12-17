@@ -1,4 +1,5 @@
 import pyxel
+import random
 
 class Mapa:
     def __init__(self):
@@ -22,7 +23,13 @@ class Mapa:
         ]
 
 
-        
+    def pos_random(self):
+        while True:
+            x = random.randint(1, len(self.mapa[0])-2)
+            y = random.randint(1, len(self.mapa)-2)
+            if self.mapa[y][x] == 0:
+                return x*32, y*32
+    
     def draw(self):
         muro_size = 32
         for y in range(len(self.mapa)):

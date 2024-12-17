@@ -9,7 +9,7 @@ class PacManApp:
         pyxel.load("assets/resourcesPACMAN.pyxres")
         self.pacman = AnimatedSprite(32, 32)
         self.map1 = Mapa()
-        self.ghosts = [Ghost1(), Ghost2(), Ghost3(), Ghost4()]
+        self.ghosts = [Ghost1(self.map1), Ghost2(self.map1), Ghost3(self.map1), Ghost4(self.map1)]
         pyxel.run(self.update, self.draw)
 
     def update(self):

@@ -41,7 +41,7 @@ class AnimatedSprite:
         if not self.movimiento:
             self.pacman_imagen = "pacman_estático"
 
-        if not mapa.hitbox2(new_x, new_y, self.ancho, self.alto):
+        if not mapa.hitbox_pacman(new_x, new_y, self.ancho, self.alto):
             self.pacman_x = new_x
             self.pacman_y = new_y
         

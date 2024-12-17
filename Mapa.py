@@ -47,11 +47,19 @@ class Mapa:
     #        return self.mapa[fila][columna] == 1
     #    return False
     
-    def hitbox2(self, x, y ,ancho, alto):
+    def hitbox_pacman(self, x, y ,ancho, alto):
         margen_inf = 2
         margen_colision = 2
         for i in range((y + margen_inf) // 32, (y + alto - 1 - margen_inf) // 32 + 1):  # Filas afectadas, desde la esquina izq hasta la derecha
             for j in range((x + margen_colision) // 32 , (x + ancho - 1 - margen_colision) // 32 + 1):  # Columnas afectadas, desde la esquina izq hasta la derecha
                 if 0 <= i < len(self.mapa) and 0 <= j < len(self.mapa[0]):  # Límite del mapa
                     if self.mapa[i][j] == 1:  # Si hay un muro
+                        return True
+    def hitbox_fantasma(self, x, y, ancho, alto):
+        margen_inf = 1
+        margen_colision = 1
+        for i in range((y + margen_inf) // 32, (y + alto - 1 - margen_inf) // 32 + 1):
+            for j in range((x + margen_colision) // 32 , (x + ancho - 1 - margen_colision) // 32 + 1): 
+                if 0 <= i < len(self.mapa) and 0 <= j < len(self.mapa[0]):
+                    if self.mapa[i][j] == 1:
                         return True

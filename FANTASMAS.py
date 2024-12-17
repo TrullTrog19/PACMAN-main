@@ -18,7 +18,7 @@ class Fantasma:
         self.animation_speed = animation_speed
         # Temporizador para controlar la animación
         self.timer = 0
-
+        self.direccion = random.choice(["arriba", "abajo", "izquierda", "derecha"])
         self.huyendo = False  # Indica si el fantasma está huyendo de Pac-Man        
 
 

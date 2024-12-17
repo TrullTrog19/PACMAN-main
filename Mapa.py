@@ -42,6 +42,26 @@ class Mapa:
         for fruta in self.frutas:
             pyxel.blt(fruta[0]*32 + 8, fruta[1]*32 + 8, 1, 0, 48, 56, 16, 0)  # Dibuja la fruta en las esquinas
 
+    def hitbox_pacman(self, x, y, ancho, alto):
+        margen_inf = 2
+        margen_colision = 2
+        for i in range(int((y + margen_inf) // 32), int((y + alto - 1 - margen_inf) // 32) + 1):  # Filas afectadas
+            for j in range(int((x + margen_colision) // 32), int((x + ancho - 1 - margen_colision) // 32) + 1):  # Columnas afectadas
+                if 0 <= i < len(self.mapa) and 0 <= j < len(self.mapa[0]):  # Límite del mapa
+                    if self.mapa[i][j] == 1:  # Si hay un muro
+                        return True
+        return False
+
+    def hitbox_fantasma(self, x, y, ancho, alto):
+        margen_inf = 1
+        margen_colision = 1
+        for i in range(int((y + margen_inf) // 32), int((y + alto - 1 - margen_inf) // 32) + 1):  # Filas afectadas
+            for j in range(int((x + margen_colision) // 32), int((x + ancho - 1 - margen_colision) // 32) + 1):  # Columnas afectadas
+                if 0 <= i < len(self.mapa) and 0 <= j < len(self.mapa[0]):  # Límite del mapa
+                    if self.mapa[i][j] == 1:  # Si hay un muro
+                        return True
+        return False
+    
     def es_muro(self, x, y):
         columna = x // 32
         fila = y // 32
@@ -72,3 +92,5 @@ class Mapa:
             self.frutas.remove((columna, fila))  # Elimina la fruta del mapa
             return True
         return False
+    
+    

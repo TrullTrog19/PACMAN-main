@@ -21,15 +21,16 @@ class PacManApp:
         self.ghost5_mode = False  # Modo Ghost5 activado
         self.ghost5_mode_start_time = 0  # Tiempo de inicio del modo Ghost5
         self.ghost_positions = []  # Lista para almacenar las posiciones de los fantasmas
+        self.ghosts_initial_positions = [(448, 448), (448, 448), (448, 448), (448, 448)]  # Posiciones iniciales de los fantasmas
 
     def update(self):
         if self.pacman.update(self.map1):
             self.bolitas_comidas += 1  # Incrementa el contador si se ha comido una bolita
-        for ghost in self.ghosts:
+        for i, ghost in enumerate(self.ghosts):
             ghost.update()
             if self.check_collision(self.pacman, ghost):
                 if isinstance(ghost, Ghost5):
-                    ghost.ghost_x, ghost.ghost_y = self.map1.pos_random()  # Ghost5 reaparece en una posición aleatoria
+                    ghost.ghost_x, ghost.ghost_y = self.ghosts_initial_positions[i]  # Ghost5 reaparece en su posición inicial
                 elif ghost.huyendo:
                     ghost.ghost_x, ghost.ghost_y = self.map1.pos_random()  # Reaparece en una posición aleatoria
                     ghost.huyendo = False  # Deja de huir

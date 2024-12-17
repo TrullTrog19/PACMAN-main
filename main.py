@@ -14,7 +14,7 @@ class PacManApp:
         self.bolitas_comidas = 0  # Contador de bolitas comidas
 
         self.vidas = 3  # Contador de vidas
-        self.ghosts = [Ghost1(self.map1, self.pacman), Ghost2(self.map1), Ghost3(self.map1), Ghost4(self.map1)]
+        self.ghosts = [Ghost1(self.map1, self.pacman), Ghost2(self.map1, self.pacman), Ghost3(self.map1), Ghost4(self.map1)]
         self.fruit_ghost = None  # Fantasma que aparece cuando Pac-Man se come frutas
 
         self.ghosts = [Ghost1(self.map1, self.pacman), Ghost2(self.map1, self.pacman), Ghost3(self.map1), Ghost4(self.map1)]

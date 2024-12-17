@@ -15,9 +15,9 @@ class BolitasManager:
         self.generar_bolitas()
 
     def generar_bolitas(self):
-        for y in range(0, pyxel.height, 32):  # Asumiendo que cada celda del mapa es de 16x16 píxeles
+        for y in range(0, pyxel.height, 32):  # Asumiendo que cada celda del mapa es de 32x32 píxeles
             for x in range(0, pyxel.width, 32):
-                if not self.mapa.es_muro(x, y):  # Verifica si la posición no es un muro
+                if self.mapa.es_bolita(x, y):  # Verifica si la posición es una bolita
                     self.bolitas.append(Bolita(x, y))
 
     def draw(self):

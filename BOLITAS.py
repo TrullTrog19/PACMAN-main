@@ -6,7 +6,7 @@ class Bolita:
         self.y = y
 
     def draw(self):
-        pyxel.blt(self.x, self.y, 0, 0, 40, 16, 16, 0)  # Dibuja la bolita en las coordenadas (0, 40) del sprite sheet
+        pyxel.blt(self.x, self.y, 1, 0, 40, 16, 16, 0)  # Dibuja la bolita en las coordenadas (0, 40) del sprite sheet
 
 class BolitasManager:
     def __init__(self, mapa):

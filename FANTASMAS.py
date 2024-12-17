@@ -16,6 +16,7 @@ class Fantasma:
         self.ancho = 30
         self.alto = 30
         self.animation_speed = animation_speed
+        self.direccion = random.choice(["arriba", "abajo", "izquierda", "derecha"])
         # Temporizador para controlar la animación
         self.timer = 0
 
@@ -26,10 +27,28 @@ class Fantasma:
         if self.timer >= self.animation_speed:
             self.current_frame = (self.current_frame + 1) % len(self.frames)
             self.timer = 0
-        self.move()
+        self.move_general()
 
-    def move(self):
-        pass  # Método para ser sobrescrito por las subclases
+    def move_general(self):
+        velocidad = 1  # Ajusta la velocidad de movimiento
+        new_x = self.ghost_x
+        new_y = self.ghost_y
+
+        if self.direccion == "arriba":
+            new_y -= velocidad
+        elif self.direccion == "abajo":
+            new_y += velocidad
+        elif self.direccion == "izquierda":
+            new_x -= velocidad
+        elif self.direccion == "derecha":
+            new_x += velocidad
+
+        if not self.mapa.hitbox_fantasma(new_x, new_y, self.ancho, self.alto):
+            self.ghost_x = new_x
+            self.ghost_y = new_y
+        else:
+            self.direccion = random.choice(["arriba", "abajo", "izquierda", "derecha"])
+
 
     def draw(self):
         # Obtiene las coordenadas del frame actual
@@ -61,7 +80,8 @@ class Ghost1(Fantasma):
             self.ghost_x = new_x
             self.ghost_y = new_y
         else:
-            self.direccion = random.choice(["arriba", "abajo", "izquierda", "derecha"])
+            #self.direccion = random.choice(["arriba", "abajo", "izquierda", "derecha"])
+            self.move_general()
 
 # Clase para el segundo tipo de fantasma
 class Ghost2(Fantasma):

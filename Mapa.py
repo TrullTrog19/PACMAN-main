@@ -21,6 +21,7 @@ class Mapa:
             [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
             [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         ]
+        self.frutas = [(1, 1), (1, 14), (14, 1), (14, 14)]  # Posiciones de las frutas
 
     def pos_random(self):
         while True:
@@ -36,8 +37,10 @@ class Mapa:
                 celda = self.mapa[y][x]
                 if celda == 1:
                     pyxel.blt(x*muro_size, y*muro_size, 1, 0, 0, muro_size, muro_size, 0)
-                elif celda == 0:
-                    pyxel.blt(x*muro_size + 8, y*muro_size + 8, 1, 0, 40, 16, 16, 0)  # Dibuja la bolita en el centro de la celda
+                elif celda == 0 and (x, y) not in self.frutas:
+                    pyxel.blt(x*muro_size + 8, y*muro_size + 8, 0, 0, 40, 16, 16, 0)  # Dibuja la bolita en el centro de la celda
+        for fruta in self.frutas:
+            pyxel.blt(fruta[0]*32 + 8, fruta[1]*32 + 8, 1, 0, 48, 56, 16, 0)  # Dibuja la fruta en las esquinas
 
     def es_muro(self, x, y):
         columna = x // 32
@@ -62,22 +65,10 @@ class Mapa:
                 return True
         return False
     
-    def hitbox_pacman(self, x, y, ancho, alto):
-        margen_inf = 2
-        margen_colision = 2
-        for i in range((y + margen_inf) // 32, (y + alto - 1 - margen_inf) // 32 + 1):  # Filas afectadas, desde la esquina izq hasta la derecha
-            for j in range((x + margen_colision) // 32, (x + ancho - 1 - margen_colision) // 32 + 1):  # Columnas afectadas, desde la esquina izq hasta la derecha
-                if 0 <= i < len(self.mapa) and 0 <= j < len(self.mapa[0]):  # Límite del mapa
-                    if self.mapa[i][j] == 1:  # Si hay un muro
-                        return True
-        return False
-    
-    def hitbox_fantasma(self, x, y, ancho, alto):
-        margen_inf = 1
-        margen_colision = 1
-        for i in range((y + margen_inf) // 32, (y + alto - 1 - margen_inf) // 32 + 1):
-            for j in range((x + margen_colision) // 32 , (x + ancho - 1 - margen_colision) // 32 + 1): 
-                if 0 <= i < len(self.mapa) and 0 <= j < len(self.mapa[0]):
-                    if self.mapa[i][j] == 1:
-                        return True
+    def comer_fruta(self, x, y):
+        columna = (x + 16) // 32  # Ajusta la posición para el centro de Pac-Man
+        fila = (y + 16) // 32  # Ajusta la posición para el centro de Pac-Man
+        if (columna, fila) in self.frutas:
+            self.frutas.remove((columna, fila))  # Elimina la fruta del mapa
+            return True
         return False

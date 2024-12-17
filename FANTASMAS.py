@@ -84,7 +84,7 @@ class Ghost1(Fantasma):
         super().__init__(mapa, frames, pacman=pacman)
 
     def move(self):
-        velocidad = 3
+        velocidad = 1
         movimiento = False
         new_x = self.ghost_x
         new_y = self.ghost_y
@@ -153,7 +153,7 @@ class Ghost2(Fantasma):
     
     def move(self):
         moved = False
-        velocidad = 3
+        velocidad = 1
 
         if self.pacman:
             # Calcular la dirección hacia Pacman

@@ -48,8 +48,8 @@ class Mapa:
     #    return False
     
     def hitbox2(self, x, y ,ancho, alto):
-        margen_inf = 3
-        margen_colision = 3
+        margen_inf = 2
+        margen_colision = 2
         for i in range((y + margen_inf) // 32, (y + alto - 1 - margen_inf) // 32 + 1):  # Filas afectadas, desde la esquina izq hasta la derecha
             for j in range((x + margen_colision) // 32 , (x + ancho - 1 - margen_colision) // 32 + 1):  # Columnas afectadas, desde la esquina izq hasta la derecha
                 if 0 <= i < len(self.mapa) and 0 <= j < len(self.mapa[0]):  # Límite del mapa

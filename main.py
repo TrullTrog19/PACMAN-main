@@ -12,7 +12,7 @@ class PacManApp:
         self.pacman = AnimatedSprite(32, 32)
         self.map1 = Mapa()
         self.bolitas_manager = BolitasManager(self.map1)
-        self.ghosts = [Ghost1(self.map1), Ghost2(self.map1), Ghost3(self.map1), Ghost4(self.map1)]
+        self.ghosts = [Ghost1(self.map1, self.pacman), Ghost2(self.map1), Ghost3(self.map1), Ghost4(self.map1)]
         pyxel.run(self.update, self.draw)
 
     def update(self):

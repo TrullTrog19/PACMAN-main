@@ -54,8 +54,8 @@ class Mapa:
         return False
     
     def comer_bolita(self, x, y):
-        columna = x // 32
-        fila = y // 32
+        columna = (x + 16) // 32  # Ajusta la posición para el centro de Pac-Man
+        fila = (y + 16) // 32  # Ajusta la posición para el centro de Pac-Man
         if 0 <= fila < len(self.mapa) and 0 <= columna < len(self.mapa[0]):
             if self.mapa[fila][columna] == 0:
                 self.mapa[fila][columna] = -1  # Marca la bolita como comida

@@ -46,7 +46,7 @@ class Mapa:
             return self.mapa[fila][columna] == 1
         return False
     
-    def hitbox2(self, x, y, ancho, alto):
+    def hitbox_pacman(self, x, y, ancho, alto):
         margen_inf = 2
         margen_colision = 2
         for i in range((y + margen_inf) // 32, (y + alto - 1 - margen_inf) // 32 + 1):  # Filas afectadas, desde la esquina izq hasta la derecha
